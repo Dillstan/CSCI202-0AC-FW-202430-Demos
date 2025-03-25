@@ -2,6 +2,7 @@
 #include <iostream>
 #include <limits>
 // x = int(input("Enter a number: "))
+//
 
 void something(Donut *);
 void resetStream();
