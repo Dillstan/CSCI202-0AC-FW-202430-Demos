@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "node.h"
+#include "linkedListIterator.h"
 
 template <class t>
 class linkedListType
@@ -21,6 +22,9 @@ public:
     virtual void insert(const t &newInfo) = 0;
     virtual void deleteNode(const t &deleteItem) = 0;
     virtual bool search(const t &searchItem) const = 0;
+    linkedListIterator<t> begin();
+    linkedListIterator<t> end();
+    friend std::ostream &operator<<(std::ostream &, const linkedListType<t> &);
 
 protected:
     node<t> *head;
@@ -150,6 +154,32 @@ int linkedListType<t>::length() const
     return count;
 }
 
+template <class t>
+std::ostream &operator<<(std::ostream &out, const linkedListType<t> &list)
+{
+    if (!list.isEmptyList())
+    {
+        node<t> *current;
+        current = list.head;
+        while (current != nullptr)
+        {
+            out << *(current->data) << std::endl;
+            current = current->link;
+        }
+    }
+}
+
+template <class t>
+linkedListIterator<t> linkedListType<t>::begin()
+{
+    return linkedListIterator<t>(head);
+}
+
+template <class t>
+linkedListIterator<t> linkedListType<t>::end()
+{
+    return linkedListIterator<t>();
+}
 /* template <class t>
 void linkedListType<t>::insert(const t &newData)
 {
