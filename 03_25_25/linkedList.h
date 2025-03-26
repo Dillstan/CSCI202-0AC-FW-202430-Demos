@@ -24,7 +24,8 @@ public:
     virtual bool search(const t &searchItem) const = 0;
     linkedListIterator<t> begin();
     linkedListIterator<t> end();
-    friend std::ostream &operator<<(std::ostream &, const linkedListType<t> &);
+    void print(std::ostream &, std::string = " ") const;
+    // friend std::ostream &operator<<(std::ostream &, const linkedListType<t> &);
 
 protected:
     node<t> *head;
@@ -167,6 +168,7 @@ std::ostream &operator<<(std::ostream &out, const linkedListType<t> &list)
             current = current->link;
         }
     }
+    return out;
 }
 
 template <class t>
@@ -180,24 +182,20 @@ linkedListIterator<t> linkedListType<t>::end()
 {
     return linkedListIterator<t>();
 }
-/* template <class t>
-void linkedListType<t>::insert(const t &newData)
+
+template <class t>
+void linkedListType<t>::print(std::ostream &out, std::string sep) const
 {
-    node<t> *newNode;
-    newNode = new node<t>;
-    newNode->data = new t(newData);
-    newNode->link = nullptr;
-    if (this->isEmptyList())
+    if (!isEmptyList())
     {
-        this->head = newNode;
-        this->tail = newNode;
+        node<t> *current;
+        current = head;
+        while (current != nullptr)
+        {
+            out << *(current->data) << sep;
+            current = current->link;
+        }
     }
-    else
-    {
-        newNode->link = this->head;
-        this->head = newNode;
-    }
-    this->count++;
-} */
+}
 
 #endif
