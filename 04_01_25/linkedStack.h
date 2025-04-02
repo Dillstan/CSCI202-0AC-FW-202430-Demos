@@ -80,7 +80,7 @@ void linkedStack<t>::copyStack(const linkedStack<t> &othStack)
     }
     else
     {
-        current = otherStack.stackTop;
+        current = othStack.stackTop;
         this->stackTop = new node<t>;
         this->stackTop->data = new t(*(current->data));
         this->stackTop->link = nullptr;
@@ -88,8 +88,8 @@ void linkedStack<t>::copyStack(const linkedStack<t> &othStack)
         current = current->link;
         while (current != nullptr)
         {
-            newNode = new node<t>
-                          newNode->data = new t(*(current->data));
+            newNode = new node<t>;
+            newNode->data = new t(*(current->data));
             newNode->link = nullptr;
             last->link = newNode;
             last = newNode;
