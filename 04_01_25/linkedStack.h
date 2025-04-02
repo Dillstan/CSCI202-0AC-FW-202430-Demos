@@ -112,4 +112,47 @@ void linkedStack<t>::initializeStack()
     count = 0;
 }
 
+template <class t>
+linkedStack<t>::~linkedStack()
+{
+    initializeStack();
+}
+
+template <class t>
+void linkedStack<t>::push(const t &newItem)
+{
+    node<t> *newNode;
+    newNode = new node<t>;
+    newNode->data = new t(newItem);
+    newNode->link = stackTop;
+    stackTop = newNode;
+    count++;
+}
+
+template <class t>
+t linkedStack<t>::pop()
+{
+    node<t> *temp;
+    if (isEmptyStack())
+    {
+        throw std::underflow_error("Stack underflow. Cannot remove from an empty stack.");
+    }
+    t copyT(*(stackTop->data));
+    temp = stackTop;
+    stackTop = stackTop->link;
+    delete temp;
+    count--;
+    return copyT;
+}
+
+template <class t>
+t linkedStack<t>::top() const
+{
+    if (isEmptyStack())
+    {
+        throw std::out_of_range("Empty Stack");
+    }
+    return *(stackTop->data);
+}
+
 #endif

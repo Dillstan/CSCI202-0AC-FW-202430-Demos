@@ -97,4 +97,48 @@ void arrayStack<t>::initializeStack()
     stacktop = 0;
 }
 
+template <class t>
+arrayStack<t>::~arrayStack()
+{
+    initializeStack();
+    delete[] list;
+}
+
+template <class t>
+void arrayStack<t>::push(const t &newItem)
+{
+    if (!isFullStack())
+    {
+        list[stacktop] = new t(newItem);
+        stacktop++;
+    }
+    else
+    {
+        throw std::overflow_error("Stack Overflow. Cannot add to a full stack.");
+    }
+}
+
+template <class t>
+t arrayStack<t>::pop()
+{
+    if (isEmptyStack())
+    {
+        throw std::underflow_error("Stack underflow. Cannot remove from an empty stack.");
+    }
+    t copyT(*(list[stacktop - 1]));
+    delete list[stacktop - 1];
+    stacktop--;
+    return copyT;
+}
+
+template <class t>
+t arrayStack<t>::top() const
+{
+    if (isEmptyStack())
+    {
+        throw std::out_of_range("Empty Stack");
+    }
+    return *(list[stacktop - 1]);
+}
+
 #endif
