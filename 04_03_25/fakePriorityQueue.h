@@ -31,7 +31,7 @@ void fakePriorityQueue<t>::enqueue(const t &queueElement)
         while (current != nullptr)
         {
             // if new is higher priority than current, place before
-            if (newNode->data > current->data)
+            if (*(newNode->data) > *(current->data))
             {
                 //if previous is null, then it is the new front
                 if(previous == nullptr)
@@ -45,7 +45,7 @@ void fakePriorityQueue<t>::enqueue(const t &queueElement)
                 return;
             }
             //if current is the same as the new node put new after the current
-            else if(current->data == newNode->data)
+            else if(*(current->data) == *(newNode->data))
             {
                 newNode->link = current->link;
                 current->link = newNode;
