@@ -19,7 +19,7 @@ public:
     const linkedQueue<t> &operator=(const linkedQueue<t> &);
     ~linkedQueue();
 
-private:
+protected:
     node<t> *queueFront;
     node<t> *queueRear;
     void copyQueue(const linkedQueue<t> &);
@@ -56,7 +56,7 @@ t linkedQueue<t>::front() const
 {
     if (this->isEmptyQueue())
     {
-        throw std::out_of_range("Cannot view an item in an empty queue.")
+        throw std::out_of_range("Cannot view an item in an empty queue.");
     }
     return *(queueFront->data);
 }
@@ -66,7 +66,7 @@ t linkedQueue<t>::back() const
 {
     if (this->isEmptyQueue())
     {
-        throw std::out_of_range("Cannot view an item in an empty queue.")
+        throw std::out_of_range("Cannot view an item in an empty queue.");
     }
     return *(queueRear->data);
 }

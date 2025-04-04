@@ -55,7 +55,7 @@ t arrayQueue<t>::front() const
 {
     if (this->isEmptyQueue())
     {
-        throw std::out_of_range("Cannot view an item in an empty queue.")
+        throw std::out_of_range("Cannot view an item in an empty queue.");
     }
     return *(list[queueFront + 1]);
 }
@@ -65,7 +65,7 @@ t arrayQueue<t>::back() const
 {
     if (this->isEmptyQueue())
     {
-        throw std::out_of_range("Cannot view an item in an empty queue.")
+        throw std::out_of_range("Cannot view an item in an empty queue.");
     }
     return *(list[queueRear]);
 }
@@ -104,7 +104,7 @@ arrayQueue<t>::arrayQueue(int size)
     }
     this->maxQueueSize = size;
     this->list = new t *[this->maxQueueSize];
-    this->count = 0;
+
     for (int i = 0; i < maxQueueSize; i++)
     {
         this->list[i] = nullptr;
@@ -131,10 +131,11 @@ void arrayQueue<t>::copyQueue(const arrayQueue<t> &othQueue)
     this->list = new t *[this->maxQueueSize];
     this->queueFront = othQueue.queueFront;
     this->queueRear = othQueue.queueRear;
-    for (int i = queueFront + 1; i != queueRear; i = (i + 1) % maxQueueSize)
+    for (int i = (queueFront + 1) % maxQueueSize; i != queueRear; i = (i + 1) % maxQueueSize)
     {
         this->list[i] = new t(*(othQueue.list[i]));
     }
+    this->list[queueRear] = new t(*(othQueue.list[othQueue.queueRear]));
 }
 
 template <class t>
